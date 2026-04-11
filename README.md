@@ -17,7 +17,7 @@ This project is an interactive dashboard built using Streamlit to analyze an e-c
 - Streamlit
 
 ## Live Demo
-https://your-app-name.streamlit.app
+https://ecommerce-dashboard-3ghvdkzsasfhmseaocozph.streamlit.app/
 
 ## Dataset
 Brazilian E-Commerce Public Dataset (Olist)
