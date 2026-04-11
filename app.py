@@ -9,11 +9,11 @@ st.title("E-Commerce Dashboard 📊")
 st.markdown("### Interactive E-Commerce Insights Dashboard")
 
 # Load datasets
-orders = pd.read_csv("data/olist_orders_dataset.csv")
-payments = pd.read_csv("data/olist_order_payments_dataset.csv")
-order_items = pd.read_csv("data/olist_order_items_dataset.csv")
-products = pd.read_csv("data/olist_products_dataset.csv")
-category = pd.read_csv("data/product_category_name_translation.csv")
+orders = pd.read_csv("Data/olist_orders_dataset.csv")
+payments = pd.read_csv("Data/olist_order_payments_dataset.csv")
+order_items = pd.read_csv("Data/olist_order_items_dataset.csv")
+products = pd.read_csv("Data/olist_products_dataset.csv")
+category = pd.read_csv("Data/product_category_name_translation.csv")
 
 # Data Cleaning
 # Filter delivered orders
