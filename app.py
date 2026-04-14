@@ -5,7 +5,7 @@ import seaborn as sns
 
 # Title
 st.title("E-Commerce Dashboard 📊")
-
+st.set_page_config(layout="wide")
 st.markdown("### Interactive E-Commerce Insights Dashboard")
 
 # Load datasets
@@ -90,12 +90,13 @@ st.header("Revenue Analysis 💰")
 monthly_revenue = revenue_df.groupby(['month'])['payment_value'].sum().reset_index()
 
 fig, ax = plt.subplots()
-ax.bar(monthly_revenue['month'], monthly_revenue['payment_value'])
 
+ax.plot(monthly_revenue['month'], monthly_revenue['payment_value'], marker='o')
+
+ax.set_title("Monthly Revenue Trend", fontsize=14)
 ax.set_xlabel("Month")
 ax.set_ylabel("Revenue")
-
-st.pyplot(fig)
+ax.grid(True, linestyle='--', alpha=0.5)
 
 # Delivery Performance
 st.header("Delivery Performance ⏱️")
@@ -103,7 +104,18 @@ st.header("Delivery Performance ⏱️")
 fig2, ax2 = plt.subplots()
 sns.countplot(data=filtered_orders, x='delivery_status', ax=ax2)
 
-st.pyplot(fig2)
+col1, col2 = st.columns(2)
+
+with col1:
+    st.pyplot(fig)
+
+with col2:
+    st.pyplot(fig2)
+    
+delivery_counts = filtered_orders['delivery_status'].value_counts(normalize=True) * 100
+
+st.write("### Delivery Performance (%)")
+st.write(delivery_counts.round(2))
 
 # Product Analysis
 st.header("Top Categories 🛒")
@@ -116,6 +128,15 @@ product_df = product_df[product_df['order_id'].isin(filtered_orders['order_id'])
 top_categories = product_df['product_category_name_english'].value_counts().head(10)
 
 fig3, ax3 = plt.subplots()
-top_categories.plot(kind='bar', ax=ax3)
+top_categories.sort_values().plot(kind='barh', ax=ax3)
 
 st.pyplot(fig3)
+
+st.header("📌 Key Insights")
+
+st.write(f"""
+- 📈 Total Revenue in {selected_year}: ${total_revenue:,.0f}
+- 🚚 Average Delivery Delay: {avg_delivery:.2f} days
+- ⏱️ Most orders delivered on time
+- 🛒 Top Category: {top_categories.index[0]}
+""")
